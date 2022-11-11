@@ -1,5 +1,5 @@
 public class Main {
     public static void main(String[] args) {
-        MineSweeper gameManager = new MineSweeper(10,10,10);
+        MineSweeperFrame frame = new MineSweeperFrame(16,16,40);
     }
 }

@@ -14,24 +14,24 @@ public class MineSweeper {
     private boolean showNbTouchingMines = false;
 
     // grid properties
-    private int nbRows;
+    private final int nbRows;
 
-    private int nbCols;
-    private Cell[][] grid;  //premier crochet correspond à la ligne et le second à la colonne
+    private final int nbCols;
+    private final Cell[][] grid;  //premier crochet correspond à la ligne et le second à la colonne
 
-    private int nbCasesWithoutMines;
+    private final int nbCasesWithoutMines;
     private int tour;
     private boolean lose;
-    private MineSweeperFrame frame;
+    private final MineSweeperFrame frame;
     private int remainingMines;
 
 
-    public MineSweeper(int nbRows, int nbCols, int nbMines) {
+    public MineSweeper(int nbRows, int nbCols, int nbMines, MineSweeperFrame frame) {
         this.nbRows = nbRows;
         this.nbCols = nbCols;
         this.nbCasesWithoutMines = this.nbCols * this.nbRows - nbMines;
         this.remainingMines = nbCols * nbRows - nbCasesWithoutMines;
-        this.frame = new MineSweeperFrame(nbRows,nbCols,this);
+        this.frame = frame;
         this.grid = new Cell[nbRows][nbCols];
         for(int i = 0; i<nbRows;i++){
             for(int j=0; j<nbCols;j++){

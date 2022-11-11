@@ -6,55 +6,55 @@ import java.awt.event.MouseEvent;
 public class MineSweeperMouseAdapter extends MouseAdapter {
 
     private final MineSweeperButton button;
-    private final MineSweeper gameManager;
+    private final MineSweeperFrame frame;
     private int nRightClick;
 
 
-    MineSweeperMouseAdapter(MineSweeperButton button, MineSweeper gameManager){
+    MineSweeperMouseAdapter(MineSweeperButton button, MineSweeperFrame frame){
         this.button=button;
-        this.gameManager=gameManager;
+        this.frame=frame;
         nRightClick=0;
     }
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        if (!gameManager.isLose() && gameManager.getTour() < gameManager.getNbCasesWithoutMines()) {
+        if (!frame.getGameManager().isLose() && frame.getGameManager().getTour() < frame.getGameManager().getNbCasesWithoutMines()) {
             if (e.getButton() == 3) { // if right click
                 nRightClick++;
                 if (nRightClick == 1) {
-                    gameManager.setRemainingMines(gameManager.getRemainingMines()-1);
-                    gameManager.getGrid()[button.getRow()][button.getCol()].setThinkMine(true);
+                    frame.getGameManager().setRemainingMines(frame.getGameManager().getRemainingMines()-1);
+                    frame.getGameManager().getGrid()[button.getRow()][button.getCol()].setThinkMine(true);
                 }
                 if (nRightClick == 2) {
-                    gameManager.setRemainingMines(gameManager.getRemainingMines()+1);
-                    gameManager.getGrid()[button.getRow()][button.getCol()].setDontKnow(true);
+                    frame.getGameManager().setRemainingMines(frame.getGameManager().getRemainingMines()+1);
+                    frame.getGameManager().getGrid()[button.getRow()][button.getCol()].setDontKnow(true);
                 }
                 if (nRightClick == 3) {
-                    gameManager.getGrid()[button.getRow()][button.getCol()].setDontKnow(false);
-                    gameManager.getGrid()[button.getRow()][button.getCol()].setThinkMine(false);
+                    frame.getGameManager().getGrid()[button.getRow()][button.getCol()].setDontKnow(false);
+                    frame.getGameManager().getGrid()[button.getRow()][button.getCol()].setThinkMine(false);
                     button.setText("");
                     nRightClick = 0;
                 }
-                gameManager.getFrame().setLabelNbMines(gameManager.getRemainingMines());
-                gameManager.print();
+                frame.getGameManager().getFrame().setLabelNbMines(frame.getGameManager().getRemainingMines());
+                frame.getGameManager().print();
             }
             if (e.getButton() == 1) {
-                gameManager.unveil(button.getRow(), button.getCol());
+                frame.getGameManager().unveil(button.getRow(), button.getCol());
                 button.setEnabled(false);
-                gameManager.print();
-                if (gameManager.isLose()) {
-                    gameManager.setShowMines(true);
-                    gameManager.print();
-                    gameManager.getFrame().add(new JLabel("Partie finie, vous avez perdu", SwingConstants.CENTER),BorderLayout.NORTH);
-                    gameManager.getFrame().pack();
-                    gameManager.getFrame().setVisible(true);
+                frame.getGameManager().print();
+                if (frame.getGameManager().isLose()) {
+                    frame.getGameManager().setShowMines(true);
+                    frame.getGameManager().print();
+                    frame.getGameManager().getFrame().add(new JLabel("Partie finie, vous avez perdu", SwingConstants.CENTER),BorderLayout.NORTH);
+                    frame.getGameManager().getFrame().pack();
+                    frame.getGameManager().getFrame().setVisible(true);
                 }
-                if(gameManager.getTour() == gameManager.getNbCasesWithoutMines()) {
-                    gameManager.setShowMines(true);
-                    gameManager.print();
-                    gameManager.getFrame().add(new JLabel("Partie finie, vous avez gagné", SwingConstants.CENTER),BorderLayout.NORTH);
-                    gameManager.getFrame().pack();
-                    gameManager.getFrame().setVisible(true);
+                if(frame.getGameManager().getTour() == frame.getGameManager().getNbCasesWithoutMines()) {
+                    frame.getGameManager().setShowMines(true);
+                    frame.getGameManager().print();
+                    frame.getGameManager().getFrame().add(new JLabel("Partie finie, vous avez gagné", SwingConstants.CENTER),BorderLayout.NORTH);
+                    frame.getGameManager().getFrame().pack();
+                    frame.getGameManager().getFrame().setVisible(true);
                 }
             }
         }
