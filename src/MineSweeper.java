@@ -19,6 +19,7 @@ public class MineSweeper {
     private boolean lose;
     private MineSweeperFrame frame;
 
+
     public MineSweeper(int nbRows, int nbCols, int nbMines) {
         this.frame = new MineSweeperFrame(nbRows,nbCols,this);
         this.nbRows = nbRows;
@@ -72,32 +73,18 @@ public class MineSweeper {
     // prints the game grid
     public void print(){
 
-        int firstColumnWidth = (int)Math.ceil(Math.log10(this.nbRows));     // first column width = number of digits in nbRows
-        int otherColumnsWidth = (int)Math.ceil(Math.log10(this.nbCols));    // other columns width = number of digits in nbCols
-
-        // first line = column numbers
-        System.out.printf("%" + firstColumnWidth + "s ", "");
-        for(int j = 0; j < this.nbCols; j++){
-            System.out.printf("%" + otherColumnsWidth + "s ", j);
-        }
-        System.out.println();
-
         MineSweeperButton[][] buttonArray = frame.getPanel().getButtonsArray();
 
         for(int i = 0; i < this.nbRows; i++){
 
-            // first column = row numbers
-            System.out.printf("%" + firstColumnWidth + "s ", i);
             for(int j= 0; j < this.nbCols; j++){
 
                 Cell cell = this.grid[i][j];
                 String cellSymbol = getCellSymbol(cell);
-                System.out.printf("%" + otherColumnsWidth + "s ", cellSymbol);
-                if(grid[i][j].isVisible()) {
+                if(!cellSymbol.equals("#")) {
                     buttonArray[i][j].setText(cellSymbol);
                 }
             }
-            System.out.println();
         }
     }
 
@@ -166,8 +153,6 @@ public class MineSweeper {
     public void unveil(int row, int col){
         if(grid[row][col].isMine()){
             grid[row][col].setVisible(true);
-            System.out.println("Vous avez perdu");
-            System.out.println("Voici l'emplacement des mines");
             showMines=true;
             print();
             lose=true;
@@ -203,46 +188,28 @@ public class MineSweeper {
         }
     }
 
-    public void play(){
-        while (!lose &&tour<nbCasesWithoutMines) {
-            try {
-                print();
-                Scanner sc = new Scanner(System.in);
-                System.out.println("Veuillez faire l'une des actions suivantes :");
-                System.out.println("- Dévoiler une case (exemple pour la case à la ligne 1 et à la colonne 3 : \"d 1 3\"");
-                System.out.println("- Marquer une case comme possedant une mine (exemple pour la case à la ligne 1 et à la colonne 3 : \"m 1 3 !\"");
-                System.out.println("- Marquer une case comme inconnue (exemple pour la case à la ligne 1 et à la colonne 3 : \"m 1 3 ?\"");
-                System.out.println("- Enlever les marquages (exemple pour la case à la ligne 1 et à la colonne 3 : \"m 1 3 #\"");
-                System.out.println("- Quitter le jeu \"q\"");
-                String commande = sc.nextLine();
-                String[] arrOfCommand = commande.split(" ");
-                if (arrOfCommand[0].equals("q")) {
-                    return;
-                }
-                int row = Integer.parseInt(arrOfCommand[1]);
-                int col = Integer.parseInt(arrOfCommand[2]);
-                if (arrOfCommand[0].equals("d")) {
-                    unveil(row, col);
-                    if (tour == nbCasesWithoutMines && !lose) {
-                        System.out.println("Vous avez gagné !");
-                        print();
-                    }
-                }
-                if (arrOfCommand[0].equals("m")) {
-                    if (arrOfCommand[3].equals("?")) {
-                        grid[row][col].setDontKnow(true);
-                    }
-                    if (arrOfCommand[3].equals("!")) {
-                        grid[row][col].setThinkMine(true);
-                    }
-                    if (arrOfCommand[3].equals("#")) {
-                        grid[row][col].setDontKnow(false);
-                        grid[row][col].setThinkMine(false);
-                    }
-                }
-            }catch (Exception e){
-                System.out.println(e);
-            }
-        }
+
+    public Cell[][] getGrid() {
+        return grid;
+    }
+
+    public boolean isLose() {
+        return lose;
+    }
+
+    public int getTour() {
+        return tour;
+    }
+
+    public int getNbCasesWithoutMines() {
+        return nbCasesWithoutMines;
+    }
+
+    public MineSweeperFrame getFrame() {
+        return frame;
+    }
+
+    public void setShowMines(boolean showMines) {
+        this.showMines = showMines;
     }
 }

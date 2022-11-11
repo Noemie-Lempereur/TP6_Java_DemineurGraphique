@@ -1,5 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class MineSweeperButton extends JButton {
     private int row;
@@ -8,8 +10,8 @@ public class MineSweeperButton extends JButton {
         this.row=row;
         this.col=col;
         this.setPreferredSize(new Dimension(50,50));
-        MineSweeperButtonListener listener = new MineSweeperButtonListener(this,gameManager);
-        this.addActionListener(listener);
+        MineSweeperMouseAdapter mouseAdapter = new MineSweeperMouseAdapter(this,gameManager);
+        this.addMouseListener (mouseAdapter);
     }
 
     public int getRow() {

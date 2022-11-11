@@ -6,7 +6,8 @@ public class MineSweeperFrame extends JFrame {
     public MineSweeperFrame(int row, int col, MineSweeper gameManager){
         super();
         this.panel = new MineSweeperPanel(row, col,gameManager);
-        this.add(panel);
+        this.setLayout(new BorderLayout());
+        this.add(panel,BorderLayout.CENTER);
         panel.setVisible(true);
         this.pack();
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
