@@ -1,3 +1,8 @@
+import javax.imageio.ImageIO;
+import javax.swing.*;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.net.URL;
 import java.util.LinkedList;
 import java.util.Random;
 import java.util.Scanner;
@@ -82,7 +87,32 @@ public class MineSweeper {
                 Cell cell = this.grid[i][j];
                 String cellSymbol = getCellSymbol(cell);
                 if(!cellSymbol.equals("#")) {
-                    buttonArray[i][j].setText(cellSymbol);
+                    if (cellSymbol.equals("*")) {
+                        Icon icon = new ImageIcon("ressources/bomb.png");
+                        buttonArray[i][j].setText("");
+                        buttonArray[i][j].setIcon(icon);
+                    }else {
+                        if (cellSymbol.equals("!")) {
+                            Icon icon = new ImageIcon("ressources/flag.png");
+                            buttonArray[i][j].setText("");
+                            buttonArray[i][j].setIcon(icon);
+                        }else{
+                            if (cellSymbol.equals("?")) {
+                                Icon icon = new ImageIcon("ressources/dontKnow.png");
+                                buttonArray[i][j].setText("");
+                                buttonArray[i][j].setIcon(icon);
+                                buttonArray[i][j].setDisabledIcon(icon);
+                            }else {
+                                Icon icon = new ImageIcon("ressources/"+cellSymbol+".png");
+                                buttonArray[i][j].setIcon(icon);
+                                buttonArray[i][j].setDisabledIcon(icon);
+                                buttonArray[i][j].setText("");
+                            }
+                        }
+                    }
+                }else{
+                    buttonArray[i][j].setIcon(null);
+                    buttonArray[i][j].setText("");
                 }
             }
         }
