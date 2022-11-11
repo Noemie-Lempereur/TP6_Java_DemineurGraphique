@@ -22,9 +22,11 @@ public class MineSweeperMouseAdapter extends MouseAdapter {
             if (e.getButton() == 3) { // if right click
                 nRightClick++;
                 if (nRightClick == 1) {
+                    gameManager.setRemainingMines(gameManager.getRemainingMines()-1);
                     gameManager.getGrid()[button.getRow()][button.getCol()].setThinkMine(true);
                 }
                 if (nRightClick == 2) {
+                    gameManager.setRemainingMines(gameManager.getRemainingMines()+1);
                     gameManager.getGrid()[button.getRow()][button.getCol()].setDontKnow(true);
                 }
                 if (nRightClick == 3) {
@@ -33,6 +35,7 @@ public class MineSweeperMouseAdapter extends MouseAdapter {
                     button.setText("");
                     nRightClick = 0;
                 }
+                gameManager.getFrame().setLabelNbMines(gameManager.getRemainingMines());
                 gameManager.print();
             }
             if (e.getButton() == 1) {

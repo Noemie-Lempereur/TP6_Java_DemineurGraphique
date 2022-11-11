@@ -23,19 +23,21 @@ public class MineSweeper {
     private int tour;
     private boolean lose;
     private MineSweeperFrame frame;
+    private int remainingMines;
 
 
     public MineSweeper(int nbRows, int nbCols, int nbMines) {
-        this.frame = new MineSweeperFrame(nbRows,nbCols,this);
         this.nbRows = nbRows;
         this.nbCols = nbCols;
+        this.nbCasesWithoutMines = this.nbCols * this.nbRows - nbMines;
+        this.remainingMines = nbCols * nbRows - nbCasesWithoutMines;
+        this.frame = new MineSweeperFrame(nbRows,nbCols,this);
         this.grid = new Cell[nbRows][nbCols];
         for(int i = 0; i<nbRows;i++){
             for(int j=0; j<nbCols;j++){
                 grid[i][j]=new Cell(i,j);
             }
         }
-        this.nbCasesWithoutMines = this.nbCols * this.nbRows - nbMines;
         this.tour=0;
         this.lose=false;
         putMines(nbMines);
@@ -241,5 +243,21 @@ public class MineSweeper {
 
     public void setShowMines(boolean showMines) {
         this.showMines = showMines;
+    }
+
+    public int getNbRows() {
+        return nbRows;
+    }
+
+    public int getNbCols() {
+        return nbCols;
+    }
+
+    public int getRemainingMines() {
+        return remainingMines;
+    }
+
+    public void setRemainingMines(int remainingMines) {
+        this.remainingMines = remainingMines;
     }
 }
