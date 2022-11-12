@@ -1,11 +1,9 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
 public class MineSweeperButton extends JButton {
-    private int row;
-    private int col;
+    private final int row;
+    private final int col;
     public MineSweeperButton(int row,int col, MineSweeperFrame frame) {
         this.row=row;
         this.col=col;

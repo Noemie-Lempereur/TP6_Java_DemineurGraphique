@@ -1,17 +1,11 @@
-import javax.imageio.ImageIO;
 import javax.swing.*;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.net.URL;
 import java.util.LinkedList;
 import java.util.Random;
-import java.util.Scanner;
 
 public class MineSweeper {
 
     // debug flags
     private boolean showMines = false;
-    private boolean showNbTouchingMines = false;
 
     // grid properties
     private final int nbRows;
@@ -62,7 +56,7 @@ public class MineSweeper {
             symbol = "*";
         }
         // shows the number of touching mines if the cell is visible or if the showNbTouchingMines flag is on
-        else if( cell.isVisible() || this.showNbTouchingMines ){
+        else if(cell.isVisible()){
 
             // special case of a visible cell : " " is displayed instead of "0"
             if( cell.isVisible() && cell.getNbTouchingMines() == 0){
@@ -172,7 +166,7 @@ public class MineSweeper {
                 if (!grid[row][col].isMine()) {
                     grid[row][col].setMine(true);
                     nbMinesPosees++;
-                    LinkedList<Cell> neighbors = new LinkedList<>();
+                    LinkedList<Cell> neighbors;
                     neighbors = getNeighbors(grid[row][col]);
                     for (Cell neighbor : neighbors) {
                         neighbor.setNbTouchingMines(neighbor.getNbTouchingMines() + 1);
@@ -207,9 +201,7 @@ public class MineSweeper {
                         tour++;
                         if (test.getNbTouchingMines() == 0) {
                             LinkedList<Cell> neighbors = getNeighbors(test);
-                            for (Cell neighbor : neighbors) {
-                                cells.add(neighbor);
-                            }
+                            cells.addAll(neighbors);
                         }
                     }
                 }
@@ -243,14 +235,6 @@ public class MineSweeper {
 
     public void setShowMines(boolean showMines) {
         this.showMines = showMines;
-    }
-
-    public int getNbRows() {
-        return nbRows;
-    }
-
-    public int getNbCols() {
-        return nbCols;
     }
 
     public int getRemainingMines() {

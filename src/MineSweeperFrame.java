@@ -2,9 +2,9 @@ import javax.swing.*;
 import java.awt.*;
 
 public class MineSweeperFrame extends JFrame {
-    private MineSweeperPanel panel;
-    private JLabel labelNbMines;
-    private MineSweeper gameManager;
+    private final MineSweeperPanel panel;
+    private final JLabel labelNbMines;
+    private final MineSweeper gameManager;
 
     public MineSweeperFrame(int row, int col, int nbMines){
         super();
@@ -20,9 +20,11 @@ public class MineSweeperFrame extends JFrame {
         JMenuItem beginner = new JMenuItem("Beginner");
         JMenuItem intermediate = new JMenuItem("Intermediate");
         JMenuItem expert = new JMenuItem("Expert");
+        JMenuItem custom = new JMenuItem("Custom");
         newGame.add(beginner);
         newGame.add(intermediate);
         newGame.add(expert);
+        newGame.add(custom);
         game.add(newGame);
         game.add(quitGame);
         gameBar.add(game);
@@ -35,6 +37,8 @@ public class MineSweeperFrame extends JFrame {
         intermediate.addActionListener(intermediateListener);
         MyNewGameMenuListener expertListener = new MyNewGameMenuListener(this,3);
         expert.addActionListener(expertListener);
+        MyNewGameMenuListener customListener = new MyNewGameMenuListener(this,4);
+        custom.addActionListener(customListener);
 
         //set panel game
         this.panel = new MineSweeperPanel(row, col,this);
@@ -58,19 +62,11 @@ public class MineSweeperFrame extends JFrame {
         return panel;
     }
 
-    public JLabel getLabelNbMines() {
-        return labelNbMines;
-    }
-
     public void setLabelNbMines(int remainingMines) {
         if(remainingMines<0){
             remainingMines=0;
         }
         this.labelNbMines.setText("Remaining mines : "+remainingMines);
-    }
-
-    public void setGameManager(MineSweeper gameManager) {
-        this.gameManager = gameManager;
     }
 
     public MineSweeper getGameManager() {

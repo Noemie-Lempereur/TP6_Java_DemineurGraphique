@@ -2,7 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class MineSweeperPanel extends JPanel {
-    private MineSweeperButton[][] buttonsArray;
+    private final MineSweeperButton[][] buttonsArray;
     public MineSweeperPanel(int row, int col, MineSweeperFrame frame) {
         buttonsArray = new MineSweeperButton[row][col];
         this.setLayout(new GridLayout(row,col,2,2));

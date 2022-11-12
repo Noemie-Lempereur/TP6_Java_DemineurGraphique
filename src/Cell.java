@@ -1,6 +1,6 @@
 public class Cell {
-    private int row;
-    private int col;
+    private final int row;
+    private final int col;
     private boolean mine;
     private boolean visible;
     private boolean thinkMine;
