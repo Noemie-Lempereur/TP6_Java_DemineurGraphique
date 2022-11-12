@@ -50,10 +50,18 @@ public class MyNewGameMenuListener implements ActionListener {
             ChangeListener sliderRows = e1 -> {
                 rows.getText().setText(""+rows.getSlider().getValue());
                 mines.getSlider().setMaximum((int) (0.85*rows.getSlider().getValue()*cols.getSlider().getValue()));
+                if(mines.getSlider().getValue()>mines.getSlider().getMaximum()){
+                    mines.getSlider().setValue(mines.getSlider().getMaximum());
+                    mines.getText().setText(""+mines.getSlider().getMaximum());
+                }
             };
             ChangeListener sliderCols = e12 -> {
                 cols.getText().setText(""+cols.getSlider().getValue());
                 mines.getSlider().setMaximum((int) (0.85*rows.getSlider().getValue()*cols.getSlider().getValue()));
+                if(mines.getSlider().getValue()>mines.getSlider().getMaximum()){
+                    mines.getSlider().setValue(mines.getSlider().getMaximum());
+                    mines.getText().setText(""+mines.getSlider().getMaximum());
+                }
             };
             ChangeListener sliderMines = e13 -> mines.getText().setText(""+mines.getSlider().getValue());
             ActionListener textRows = e14 -> {
