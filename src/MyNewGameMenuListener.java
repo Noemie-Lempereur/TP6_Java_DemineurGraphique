@@ -120,7 +120,7 @@ public class MyNewGameMenuListener implements ActionListener {
 
             //config frame
             frameConfig.setSize(new Dimension(600,800));
-            frameConfig.setDefaultCloseOperation(EXIT_ON_CLOSE);
+            frameConfig.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
             frameConfig.setVisible(true);
         }
     }
