@@ -16,9 +16,13 @@ public class MineSweeperFrame extends JFrame {
         JMenuBar gameBar = new JMenuBar(); //create JMenu Bar
         //create Menu
         JMenu game = new JMenu("Game");
+        JMenu score = new JMenu("Scores");
         //create Menu items for Game
         JMenu newGame = new JMenu("New");
         JMenuItem quitGame = new JMenuItem("Quit");
+        //create Menu items for Game
+        JMenuItem scoreIndiv = new JMenuItem("Personal high scores");
+        JMenuItem scoreGeneral = new JMenuItem("High scores");
         //create Menu items for newGame
         JMenuItem beginner = new JMenuItem("Beginner");
         JMenuItem intermediate = new JMenuItem("Intermediate");
@@ -30,7 +34,10 @@ public class MineSweeperFrame extends JFrame {
         newGame.add(custom);
         game.add(newGame);
         game.add(quitGame);
+        score.add(scoreIndiv);
+        score.add(scoreGeneral);
         gameBar.add(game);
+        gameBar.add(score);
         this.setJMenuBar(gameBar);
         //Add actions listeners
         quitGame.addActionListener(new MyQuitMenuListener(this));
@@ -58,6 +65,7 @@ public class MineSweeperFrame extends JFrame {
         //set frame
         this.pack();
         this.setTitle("MineSweeper");
+        this.setIconImage(new ImageIcon("ressources/bomb.png").getImage());
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setVisible(true);
     }
