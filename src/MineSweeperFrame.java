@@ -5,9 +5,12 @@ public class MineSweeperFrame extends JFrame {
     private final MineSweeperPanel panel;
     private final JLabel labelNbMines;
     private final MineSweeper gameManager;
+    private int id;
 
-    public MineSweeperFrame(int row, int col, int nbMines){
+    public MineSweeperFrame(int row, int col, int nbMines, int idUser){
         super();
+
+        this.id=idUser;
 
         //set menu
         JMenuBar gameBar = new JMenuBar(); //create JMenu Bar
@@ -54,6 +57,7 @@ public class MineSweeperFrame extends JFrame {
 
         //set frame
         this.pack();
+        this.setTitle("MineSweeper");
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setVisible(true);
     }
@@ -72,4 +76,14 @@ public class MineSweeperFrame extends JFrame {
     public MineSweeper getGameManager() {
         return gameManager;
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+
 }

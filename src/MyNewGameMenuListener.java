@@ -4,7 +4,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
+//CHANGER 4 USERID de 0 MineSweeperFrame
 
 public class MyNewGameMenuListener implements ActionListener {
     private final int niveau;
@@ -19,15 +19,15 @@ public class MyNewGameMenuListener implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if(niveau==1){
             frame.dispose();
-            frame = new MineSweeperFrame(9,9,10);
+            frame = new MineSweeperFrame(9,9,10,0);
         }
         if (niveau==2){
             frame.dispose();
-            frame = new MineSweeperFrame(16,16,40);
+            frame = new MineSweeperFrame(16,16,40,0);
         }
         if(niveau==3){
             frame.dispose();
-            frame = new MineSweeperFrame(16,30,99);
+            frame = new MineSweeperFrame(16,30,99,0);
         }
         if(niveau==4){
 
@@ -106,7 +106,7 @@ public class MyNewGameMenuListener implements ActionListener {
             ActionListener buttonConfirmListener = e17 -> {
                 frame.dispose();
                 frameConfig.dispose();
-                frame = new MineSweeperFrame(rows.getSlider().getValue(),cols.getSlider().getValue(),mines.getSlider().getValue());
+                frame = new MineSweeperFrame(rows.getSlider().getValue(),cols.getSlider().getValue(),mines.getSlider().getValue(),0);
             };
 
             //add listener
