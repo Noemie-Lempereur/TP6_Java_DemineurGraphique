@@ -1,3 +1,5 @@
+# **EN COURS DE DEVELOPPEMENT**
+
 # **MineSweeper**
 
 **_MineSweeper_** est un jeu de démineur développé en Java. Il a été proposé lors d'un TP à l'ISEN, lorsque j'étais à l'UQAC. Le but était de faire un démineur avec une interface graphique. J'ai rajouté plusieurs autres fonctionnalités que je trouvais manquantes comme l'enregistrement des joueurs et des scores dans une BDD.
